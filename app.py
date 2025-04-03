@@ -1,18 +1,17 @@
 import streamlit as st
 import os
 from dotenv import load_dotenv
-import openai
+from openai import OpenAI
 
-# Cargar variables de entorno (útil en desarrollo local)
+# Cargar variables de entorno (para desarrollo local)
 load_dotenv()
 
-# En desarrollo local, se obtiene la API key del archivo .env
-# Para despliegue en Streamlit Cloud, comenta la siguiente línea y usa:
-# api_key = st.secrets["OPENAI_API_KEY"]
+# En desarrollo local, usa la clave del archivo .env
+# Para Streamlit Cloud usa: st.secrets["OPENAI_API_KEY"]
 api_key = os.getenv("OPENAI_API_KEY")
 
-# Configurar la API key de OpenAI
-openai.api_key = api_key
+# Cliente actualizado (OpenAI >= 1.0.0)
+client = OpenAI(api_key=api_key)
 
 st.title("La receta que estás buscando")
 st.write("Ingresa los datos para generar una receta:")
@@ -49,13 +48,14 @@ if st.button("Generar receta"):
 
     st.write("Enviando prompt a la IA...")
 
-    # Llamada a la API de OpenAI utilizando GPT-4
-    response = openai.ChatCompletion.create(
+    # Nueva sintaxis del cliente OpenAI >= 1.0.0
+    response = client.chat.completions.create(
         model="gpt-4",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.7,
         max_tokens=500
     )
+
     receta = response.choices[0].message.content.strip()
 
     st.subheader("Receta Generada:")
