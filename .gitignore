@@ -1,0 +1,48 @@
+# ========================================
+# Evitar subir claves y entornos al repositorio
+# ========================================
+
+# Claves/API keys
+.env
+
+# Entorno virtual (nombres típicos en Windows, Mac y Linux)
+env/
+ENV/
+venv/
+.venv/
+
+# ========================================
+# Archivos de Python compilados
+# ========================================
+__pycache__/
+*.py[cod]
+*.pyo
+
+# ========================================
+# Archivos de log
+# ========================================
+*.log
+
+# ========================================
+# Archivos temporales de editores
+# ========================================
+*.bak
+*.tmp
+*.swp
+*.swo
+
+# ========================================
+# Archivos y carpetas de VS Code (opcional)
+# ========================================
+.vscode/
+
+# ========================================
+# Archivos del sistema operativo
+# ========================================
+.DS_Store       # macOS
+Thumbs.db       # Windows
+
+# ========================================
+# Archivos de Jupyter (si usás notebooks)
+# ========================================
+.ipynb_checkpoints/
